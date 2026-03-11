@@ -97,10 +97,10 @@ export default function CalendarView({ items, onEdit, onDelete, onSelectDate }) 
   return (
     <div className="calendar">
       <div className="calendar-header">
-        <div>
+        {/* <div>
           <h3>Календарь</h3>
           <p>Выберите дату, чтобы увидеть всех пользователей и события.</p>
-        </div>
+        </div> */}
         <div className="calendar-controls">
           <button className="ghost" type="button" onClick={() => setCurrentMonth(addMonths(currentMonth, -1))}>
             Пред.
