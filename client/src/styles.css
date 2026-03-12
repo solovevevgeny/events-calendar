@@ -38,6 +38,7 @@ body {
   color: var(--text);
   background: var(--bg);
   min-height: 100vh;
+  font-size:13px;
 }
 
 h1, h2, h3 {
@@ -91,7 +92,7 @@ p {
 .panel {
   background: var(--bg-alt);
   border-radius: 12px;
-  padding: 24px;
+  padding: 20px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow);
   animation: fadeUp 0.6s ease both;
@@ -121,23 +122,23 @@ p {
   display: inline-flex;
   gap: 8px;
   padding: 6px;
-  border-radius: 16px;
+  border-radius: 12px;
   border: 1px solid var(--border);
   background: #f3eee8;
 }
 
 .tab-button {
-  border-radius: 12px;
-  padding: 8px 16px;
+  border-radius: 8px;
+  padding: 4px 8px;
   background: transparent;
   box-shadow: none;
-  font-size: 13px;
+  font-size: 11px;
 }
 
 .tab-button.active {
   background: var(--primary);
   color: #fff;
-  box-shadow: 0 10px 20px rgba(47, 93, 80, 0.25);
+  
 }
 
 .event-form {
@@ -190,7 +191,7 @@ button {
   font-family: var(--ff);
   border: none;
   border-radius: var(--br-10);
-  padding: 6px 10px;
+  padding: 3px 10px;
   font-size: var(--fs-small);
   font-weight: 600;
   cursor: pointer;
