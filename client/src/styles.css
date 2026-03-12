@@ -410,7 +410,7 @@ button.danger:hover {
   background: #f3eee8;
   color: var(--text);
   padding: 4px 8px;
-  border-radius: 999px;
+  border-radius: 12px;
   font-size: 11px;
   font-weight: 600;
 }
