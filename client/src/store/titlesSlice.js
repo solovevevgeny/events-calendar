@@ -1,15 +1,15 @@
 ﻿import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-// export const fetchEvents = createAsyncThunk('events/fetch', async () => {
-//   const res = await fetch('/api/events');
+// export const fetchTitles = createAsyncThunk('events/fetch', async () => {
+//   const res = await fetch('/api/titles');
 //   if (!res.ok) {
 //     throw new Error('Не удалось загрузить события');
 //   }
 //   return res.json();
 // });
 
-// export const addEvent = createAsyncThunk('events/add', async (payload) => {
-//   const res = await fetch('/api/events', {
+// export const addTitle = createAsyncThunk('events/add', async (payload) => {
+//   const res = await fetch('/api/titles', {
 //     method: 'POST',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(payload),
@@ -21,8 +21,8 @@
 //   return res.json();
 // });
 
-// export const updateEvent = createAsyncThunk('events/update', async (payload) => {
-//   const res = await fetch(`/api/events/${payload.id}`, {
+// export const updateTitle = createAsyncThunk('events/update', async (payload) => {
+//   const res = await fetch(`/api/titles/${payload.id}`, {
 //     method: 'PUT',
 //     headers: { 'Content-Type': 'application/json' },
 //     body: JSON.stringify(payload),
@@ -34,8 +34,8 @@
 //   return res.json();
 // });
 
-// export const deleteEvent = createAsyncThunk('events/delete', async (id) => {
-//   const res = await fetch(`/api/events/${id}`, { method: 'DELETE' });
+// export const deleteTitle = createAsyncThunk('events/delete', async (id) => {
+//   const res = await fetch(`/api/titles/${id}`, { method: 'DELETE' });
 //   if (!res.ok) {
 //     const err = await res.json().catch(() => ({}));
 //     throw new Error(err.error || 'Не удалось удалить событие');
@@ -53,35 +53,35 @@ const titlesSlice = createSlice({
   reducers: {},
   // extraReducers: (builder) => {
   //   builder
-  //     .addCase(fetchEvents.pending, (state) => {
+  //     .addCase(fetchTitles.pending, (state) => {
   //       state.status = 'loading';
   //       state.error = null;
   //     })
-  //     .addCase(fetchEvents.fulfilled, (state, action) => {
+  //     .addCase(fetchTitles.fulfilled, (state, action) => {
   //       state.status = 'succeeded';
   //       state.items = action.payload;
   //     })
-  //     .addCase(fetchEvents.rejected, (state, action) => {
+  //     .addCase(fetchTitles.rejected, (state, action) => {
   //       state.status = 'failed';
   //       state.error = action.error.message;
   //     })
-  //     .addCase(addEvent.fulfilled, (state, action) => {
+  //     .addCase(addTitle.fulfilled, (state, action) => {
   //       state.items.unshift(action.payload);
   //     })
-  //     .addCase(updateEvent.fulfilled, (state, action) => {
+  //     .addCase(updateTitle.fulfilled, (state, action) => {
   //       const idx = state.items.findIndex((item) => item.id === action.payload.id);
   //       if (idx !== -1) state.items[idx] = action.payload;
   //     })
-  //     .addCase(deleteEvent.fulfilled, (state, action) => {
+  //     .addCase(deleteTitle.fulfilled, (state, action) => {
   //       state.items = state.items.filter((item) => item.id !== action.payload);
   //     })
-  //     .addCase(addEvent.rejected, (state, action) => {
+  //     .addCase(addTitle.rejected, (state, action) => {
   //       state.error = action.error.message;
   //     })
-  //     .addCase(updateEvent.rejected, (state, action) => {
+  //     .addCase(updateTitle.rejected, (state, action) => {
   //       state.error = action.error.message;
   //     })
-  //     .addCase(deleteEvent.rejected, (state, action) => {
+  //     .addCase(deleteTitle.rejected, (state, action) => {
   //       state.error = action.error.message;
   //     });
   // },
