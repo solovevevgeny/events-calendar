@@ -1,6 +1,8 @@
 ﻿import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, deleteEvent, fetchEvents, updateEvent } from './store/eventsSlice.js';
+import { fetchTitles } from './store/titlesSlice.js';
+
 import CalendarView from './components/CalendarView.jsx';
 import EventForm from './components/EventForm.jsx';
 import EventList from './components/EventList.jsx';
@@ -25,6 +27,8 @@ export default function App() {
 
   useEffect(() => {
     dispatch(fetchEvents());
+    dispatch(fetchTitles());
+
   }, [dispatch]);
 
   useEffect(() => {

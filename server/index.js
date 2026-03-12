@@ -50,7 +50,19 @@ const init = async () => {
       plannedFinishTime TEXT NOT NULL,
       createdAt TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
     )
+
+
   `);
+
+  await run(`
+    CREATE TABLE IF NOT EXISTS titles (
+      id INTEGER PRIMARY KEY AUTOINCREMENT,
+      title TEXT NOT NULL
+    )
+  `);
+
+
+ 
 };
 
 const validateEvent = (body) => {
@@ -95,6 +107,21 @@ app.get('/api/events', async (req, res) => {
     res.status(500).json({ error: 'db_error' });
   }
 });
+
+app.get('/api/titles', async (req, res) => {
+  try {
+    const rows = await all(
+      `SELECT id, title
+       FROM titles
+       ORDER BY id ASC, id DESC`
+    );
+    res.json(rows);
+  } catch (err) {
+    res.status(500).json({ error: 'db_error' });
+  }
+});
+
+
 
 app.post('/api/events', async (req, res) => {
   try {
