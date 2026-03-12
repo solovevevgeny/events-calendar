@@ -127,7 +127,7 @@ export default function App() {
           <div className="panel-header panel-header--split">
             <div>
               <h2>Календарь событий</h2>
-              <p>События отсортированы по дате. Используйте календарь или список для управления.</p>
+              {/* <p>События отсортированы по дате. Используйте календарь или список для управления.</p> */}
             </div>
             <div className="panel-tabs">
               <button
