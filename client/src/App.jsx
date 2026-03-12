@@ -1,6 +1,6 @@
 ﻿import { useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addEvent, deleteEvent, fetchEvents, updateEvent } from './eventsSlice.js';
+import { addEvent, deleteEvent, fetchEvents, updateEvent } from './store/eventsSlice.js';
 import CalendarView from './components/CalendarView.jsx';
 import EventForm from './components/EventForm.jsx';
 import EventList from './components/EventList.jsx';
