@@ -115,11 +115,11 @@ export default function App() {
   return (
     <div className="app">
       <header className="hero">
-        <div>
+        {/* <div>
           <p className="eyebrow">Общий календарь</p>
           <h1>События, в которых участвует вся команда</h1>
         
-        </div>
+        </div> */}
       </header>
 
       <section className="content">
