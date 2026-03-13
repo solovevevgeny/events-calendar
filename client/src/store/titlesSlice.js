@@ -1,6 +1,6 @@
 ﻿import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 
-export const fetchTitles = createAsyncThunk('events/fetch', async () => {
+export const fetchTitles = createAsyncThunk('titles/fetch', async () => {
   const res = await fetch('/api/titles');
   if (!res.ok) {
     throw new Error('Не удалось загрузить события');
@@ -8,7 +8,7 @@ export const fetchTitles = createAsyncThunk('events/fetch', async () => {
   return res.json();
 });
 
-export const addTitle = createAsyncThunk('events/add', async (payload) => {
+export const addTitle = createAsyncThunk('titles/add', async (payload) => {
   const res = await fetch('/api/titles', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
@@ -21,7 +21,7 @@ export const addTitle = createAsyncThunk('events/add', async (payload) => {
   return res.json();
 });
 
-export const updateTitle = createAsyncThunk('events/update', async (payload) => {
+export const updateTitle = createAsyncThunk('titles/update', async (payload) => {
   const res = await fetch(`/api/titles/${payload.id}`, {
     method: 'PUT',
     headers: { 'Content-Type': 'application/json' },
@@ -34,7 +34,7 @@ export const updateTitle = createAsyncThunk('events/update', async (payload) => 
   return res.json();
 });
 
-export const deleteTitle = createAsyncThunk('events/delete', async (id) => {
+export const deleteTitle = createAsyncThunk('titles/delete', async (id) => {
   const res = await fetch(`/api/titles/${id}`, { method: 'DELETE' });
   if (!res.ok) {
     const err = await res.json().catch(() => ({}));
