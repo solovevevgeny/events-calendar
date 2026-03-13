@@ -91,6 +91,21 @@ const validateEvent = (body) => {
   };
 };
 
+const validateTitle = (body) => {
+  const errors = [];
+  const fullName = String(body.fullName || '').trim();
+  const title = String(body.title || '').trim();
+
+  if (!title) errors.push('title');
+
+  return {
+    errors,
+    value: {
+      title,
+    },
+  };
+};
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
 });
@@ -155,6 +170,41 @@ app.post('/api/events', async (req, res) => {
     res.status(500).json({ error: 'db_error' });
   }
 });
+
+//
+app.post('/api/titles', async (req, res) => {
+  try {
+    const { errors, value } = validateTitle(req.body);
+
+    console.log(value);
+
+    if (errors.length) {
+      return res.status(400).json({ error: 'validation_error', fields: errors });
+    }
+
+    const result = await run(
+      `INSERT INTO titles (title)
+       VALUES (?)`
+      ,
+      [
+        value.title,
+      ]
+    );
+
+    const row = await get(
+      `SELECT id, title
+       FROM titles
+       WHERE id = ?`,
+      [result.lastID]
+    );
+
+    res.status(201).json(row);
+  } catch (err) {
+    res.status(500).json({ error: 'db_error' });
+  }
+});
+
+
 
 app.put('/api/events/:id', async (req, res) => {
   try {
