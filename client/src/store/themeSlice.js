@@ -1,21 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const getInitialTheme = () => {
-  if (typeof window === 'undefined') return 'light';
-  try {
-    const stored = window.localStorage.getItem('theme');
-    if (stored === 'light' || stored === 'dark') return stored;
-  } catch (err) {
-    // ignore storage errors (privacy mode, disabled storage)
-  }
-  const prefersDark = window.matchMedia?.('(prefers-color-scheme: dark)')?.matches;
-  return prefersDark ? 'dark' : 'light';
-};
-
 const themeSlice = createSlice({
   name: 'theme',
   initialState: {
-    mode: getInitialTheme(),
+    mode: 'light',
   },
   reducers: {
     setTheme: (state, action) => {
