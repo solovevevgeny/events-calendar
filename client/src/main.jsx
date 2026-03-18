@@ -5,6 +5,12 @@ import { store } from './store/store.js';
 import App from './App.jsx';
 import './styles.css';
 
+const initialTheme = store.getState().theme?.mode;
+if (initialTheme) {
+  document.documentElement.dataset.theme = initialTheme;
+  document.documentElement.style.colorScheme = initialTheme;
+}
+
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>

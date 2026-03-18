@@ -2,6 +2,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { addEvent, deleteEvent, fetchEvents, updateEvent } from './store/eventsSlice.js';
 import { fetchTitles } from './store/titlesSlice.js';
+import { toggleTheme } from './store/themeSlice.js';
 
 import CalendarView from './components/CalendarView.jsx';
 import EventForm from './components/EventForm.jsx';
@@ -18,6 +19,7 @@ const emptyEvent = {
 export default function App() {
   const dispatch = useDispatch();
   const { items, error } = useSelector((state) => state.events);
+  const theme = useSelector((state) => state.theme.mode);
   const [editing, setEditing] = useState(null);
   const [notice, setNotice] = useState('');
   const [view, setView] = useState('calendar');
@@ -30,6 +32,17 @@ export default function App() {
     dispatch(fetchTitles());
 
   }, [dispatch]);
+
+  useEffect(() => {
+    if (!theme) return;
+    document.documentElement.dataset.theme = theme;
+    document.documentElement.style.colorScheme = theme;
+    try {
+      window.localStorage.setItem('theme', theme);
+    } catch (err) {
+      // ignore storage errors (privacy mode, disabled storage)
+    }
+  }, [theme]);
 
   useEffect(() => {
     if (!isModalOpen) return;
@@ -116,6 +129,10 @@ export default function App() {
     openModal();
   };
 
+  const handleToggleTheme = () => {
+    dispatch(toggleTheme());
+  };
+
   return (
     <div className="app">
       <header className="hero">
@@ -133,20 +150,37 @@ export default function App() {
               <h2>Календарь событий</h2>
               {/* <p>События отсортированы по дате. Используйте календарь или список для управления.</p> */}
             </div>
-            <div className="panel-tabs">
+            <div className="panel-actions">
+              <div className="panel-tabs">
+                <button
+                  type="button"
+                  className={`tab-button${view === 'list' ? ' active' : ''}`}
+                  onClick={() => setView('list')}
+                >
+                  Список
+                </button>
+                <button
+                  type="button"
+                  className={`tab-button${view === 'calendar' ? ' active' : ''}`}
+                  onClick={() => setView('calendar')}
+                >
+                  Календарь
+                </button>
+              </div>
               <button
                 type="button"
-                className={`tab-button${view === 'list' ? ' active' : ''}`}
-                onClick={() => setView('list')}
+                className="theme-toggle"
+                data-mode={theme}
+                aria-pressed={theme === 'dark'}
+                aria-label={`Тема: ${theme === 'dark' ? 'тёмная' : 'светлая'}. Переключить.`}
+                onClick={handleToggleTheme}
               >
-                Список
-              </button>
-              <button
-                type="button"
-                className={`tab-button${view === 'calendar' ? ' active' : ''}`}
-                onClick={() => setView('calendar')}
-              >
-                Календарь
+                <span className="theme-toggle__text">
+                  {theme === 'dark' ? 'Тёмная' : 'Светлая'}
+                </span>
+                <span className="theme-toggle__track" aria-hidden="true">
+                  <span className="theme-toggle__thumb" />
+                </span>
               </button>
             </div>
           </div>

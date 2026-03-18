@@ -17,6 +17,25 @@
   --muted: #5e6a6a;
   --border: #d6d7dc;
   --shadow: 0 24px 60px rgba(31, 42, 42, 0.12);
+  --surface: #fcfbf9;
+  --surface-strong: #ffffff;
+  --surface-soft: #fbf9f6;
+  --surface-muted: #f3eee8;
+  --surface-muted-hover: #e8e1da;
+  --surface-accent: #fff7f0;
+  --surface-accent-alt: #f9f4ee;
+  --overlay: rgba(31, 42, 42, 0.45);
+  --danger: #f8d7cf;
+  --danger-hover: #f0c4b7;
+  --danger-text: #7d2b1a;
+  --success: #e0f1ea;
+  --success-text: #255b4c;
+  --error: #fde7e3;
+  --error-text: #812b1a;
+  --focus-ring: rgba(47, 93, 80, 0.2);
+  --shadow-primary: 0 12px 24px rgba(47, 93, 80, 0.25);
+  --shadow-soft: 0 10px 18px rgba(47, 93, 80, 0.1);
+  --shadow-accent: 0 12px 22px rgba(196, 107, 60, 0.2);
 
   --ff: "Montserrat", sans-serif;
 
@@ -24,6 +43,38 @@
   --br-10: 10px;
 
   --fs-small: 12px;
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #101418;
+  --bg-alt: #1a1f25;
+  --primary: #e07a5f;
+  --primary-dark: #c9654b;
+  --accent: #f2a86b;
+  --text: #f5f1ea;
+  --muted: #b7bdc6;
+  --border: #2c333b;
+  --shadow: 0 24px 60px rgba(0, 0, 0, 0.55);
+  --surface: #1e242b;
+  --surface-strong: #222831;
+  --surface-soft: #1a2026;
+  --surface-muted: #242b33;
+  --surface-muted-hover: #2d3540;
+  --surface-accent: #2b2320;
+  --surface-accent-alt: #26211f;
+  --overlay: rgba(4, 6, 8, 0.7);
+  --danger: #3a2320;
+  --danger-hover: #4a2a25;
+  --danger-text: #f0b8ad;
+  --success: #1d2f2a;
+  --success-text: #bfe5d7;
+  --error: #3b2322;
+  --error-text: #f3c1b6;
+  --focus-ring: rgba(224, 122, 95, 0.35);
+  --shadow-primary: 0 12px 24px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 10px 18px rgba(0, 0, 0, 0.4);
+  --shadow-accent: 0 12px 22px rgba(242, 168, 107, 0.25);
 }
 
 
@@ -118,13 +169,20 @@ p {
   margin-top: 4px;
 }
 
+.panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
 .panel-tabs {
   display: inline-flex;
   gap: 8px;
   padding: 6px;
   border-radius: 12px;
   border: 1px solid var(--border);
-  background: #f3eee8;
+  background: var(--surface-muted);
 }
 
 .tab-button {
@@ -139,6 +197,56 @@ p {
   background: var(--primary);
   color: #fff;
   
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 12px;
+  border-radius: 999px;
+  background: var(--surface-muted);
+  color: var(--text);
+  border: 1px solid var(--border);
+  box-shadow: none;
+}
+
+.theme-toggle:hover {
+  background: var(--surface-muted-hover);
+}
+
+.theme-toggle__text {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.theme-toggle__track {
+  width: 36px;
+  height: 20px;
+  border-radius: 999px;
+  padding: 2px;
+  background: var(--border);
+  display: flex;
+  align-items: center;
+  transition: background 0.2s ease;
+}
+
+.theme-toggle__thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--bg-alt);
+  transform: translateX(0);
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.theme-toggle[data-mode='dark'] .theme-toggle__track {
+  background: var(--primary);
+}
+
+.theme-toggle[data-mode='dark'] .theme-toggle__thumb {
+  transform: translateX(16px);
+  background: var(--surface-strong);
 }
 
 .event-form {
@@ -168,13 +276,15 @@ p {
   border: 1px solid var(--border);
   font-size: 14px;
   font-family: var(--ff);
+  background: var(--surface-strong);
+  color: var(--text);
   outline: none;
   transition: border 0.2s ease, box-shadow 0.2s ease;
 }
 
 .event-form input:focus {
   border-color: var(--primary);
-  box-shadow: 0 0 0 3px rgba(47, 93, 80, 0.2);
+  box-shadow: 0 0 0 3px var(--focus-ring);
 }
 
 .event-form .grid label:last-child {
@@ -205,7 +315,7 @@ button:active {
 button.primary {
   background: var(--primary);
   color: white;
-  box-shadow: 0 12px 24px rgba(47, 93, 80, 0.25);
+  box-shadow: var(--shadow-primary);
 }
 
 button.primary:hover {
@@ -213,21 +323,21 @@ button.primary:hover {
 }
 
 button.ghost {
-  background: #f3eee8;
+  background: var(--surface-muted);
   color: var(--text);
 }
 
 button.ghost:hover {
-  background: #e8e1da;
+  background: var(--surface-muted-hover);
 }
 
 button.danger {
-  background: #f8d7cf;
-  color: #7d2b1a;
+  background: var(--danger);
+  color: var(--danger-text);
 }
 
 button.danger:hover {
-  background: #f0c4b7;
+  background: var(--danger-hover);
 }
 
 .notice {
@@ -238,13 +348,13 @@ button.danger:hover {
 }
 
 .notice.success {
-  background: #e0f1ea;
-  color: #255b4c;
+  background: var(--success);
+  color: var(--success-text);
 }
 
 .notice.error {
-  background: #fde7e3;
-  color: #812b1a;
+  background: var(--error);
+  color: var(--error-text);
 }
 
 .event-list {
@@ -259,7 +369,7 @@ button.danger:hover {
   padding: 16px 18px;
   display: grid;
   gap: 14px;
-  background: #fcfbf9;
+  background: var(--surface);
   animation: fadeUp 0.5s ease both;
 }
 
@@ -284,7 +394,7 @@ button.danger:hover {
 .event-user {
   padding: 6px 12px;
   border-radius: 999px;
-  background: #f3eee8;
+  background: var(--surface-muted);
   font-weight: 600;
   font-size: 13px;
   white-space: nowrap;
@@ -359,7 +469,7 @@ button.danger:hover {
   border-radius: var(--border-radius);
   padding: 10px;
   min-height: 98px;
-  background: #fbf9f6;
+  background: var(--surface-soft);
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -369,7 +479,7 @@ button.danger:hover {
 
 .calendar-day:hover {
   border-color: var(--primary);
-  box-shadow: 0 10px 18px rgba(47, 93, 80, 0.1);
+  box-shadow: var(--shadow-soft);
 }
 
 .calendar-day.is-outside {
@@ -378,8 +488,8 @@ button.danger:hover {
 
 .calendar-day.is-selected {
   border-color: var(--accent);
-  box-shadow: 0 12px 22px rgba(196, 107, 60, 0.2);
-  background: #fff7f0;
+  box-shadow: var(--shadow-accent);
+  background: var(--surface-accent);
 }
 
 .calendar-day.is-today {
@@ -408,7 +518,7 @@ button.danger:hover {
 }
 
 .calendar-chip {
-  background: #f3eee8;
+  background: var(--surface-muted);
   color: var(--text);
   padding: 4px 8px;
   border-radius: 12px;
@@ -426,7 +536,7 @@ button.danger:hover {
   border: 1px dashed var(--border);
   border-radius: 12px;
   padding: 12px;
-  background: #f9f4ee;
+  background: var(--surface-accent-alt);
   display: flex;
   flex-direction: column;
   gap: 16px;
@@ -452,7 +562,7 @@ button.danger:hover {
   border: 1px solid var(--border);
   border-radius: var(--border-radius);
   padding: 12px;
-  background: #fff;
+  background: var(--surface-strong);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -478,7 +588,7 @@ button.danger:hover {
 .modal-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(31, 42, 42, 0.45);
+  background: var(--overlay);
   display: flex;
   align-items: center;
   justify-content: center;
